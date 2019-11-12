@@ -1,2 +1,0 @@
-# SamplePDFMake
-Created with CodeSandbox

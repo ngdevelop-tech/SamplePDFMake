@@ -1,0 +1,340 @@
+<form [formGroup]="formItensEstoque"  class="form form-horizontal" style="width: 2200px">
+    <div class="col-xl-6 col-lg-6 col-12 bottom-30">    
+      <div widget class="card">              
+        <div class="card-header"> 
+          <span>Cadastro de itens de estoque</span>
+          <div class="widget-controls">
+            <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
+            <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
+            <a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>
+            <a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>
+          </div>
+        </div>      
+        <div class="card-body widget-body">  
+                <div class="form-inline">  
+
+                <div class="form-group input-sm" style="width: 210px;">
+                        <label for="IdMaterial">Material<span style="color:gray">*</span></label>
+                        <select formControlName="IdMaterial" class="form-control checking-field" [formControl]="formItensEstoque.controls['IdMaterial']">                           
+                             <option value="" disabled>Selecione o material</option>
+                            <option *ngFor="let material of materiais | async"
+                                   value={{material.idMaterial}}>
+                                         {{material.nmMaterial}}
+                        </option>
+                    </select>
+                            <span class="help-block" *ngIf="formItensEstoque.get('IdMaterial').touched">
+                            <span class="text-danger" *ngIf="formItensEstoque.get('IdMaterial').hasError('required')"></span>                                                               
+                        </span>
+                </div>
+              
+                <div class="form-group col-lg-2" style="width: 450px">
+                        <label for="CdGtinEan13">Gtin/Ean13<span style="color: gray">*</span></label>
+                        <input type="text" formControlName="CdGtinEan13" (keypress)="omitirCaracterEspecial($event)" maxlength="50" class="form-control checking-field" placeholder="">
+                        <span class="help-block" *ngIf="formItensEstoque.get('CdGtinEan13').touched">
+                            <span class="text-danger" *ngIf="formItensEstoque.get('CdGtinEan13').hasError('required')"></span>                        
+                        </span>                   
+                </div>
+
+                <div class="form-group col-lg-2" style="width: 350px">
+                        <label for="CdGtinEan13Caixa">Gtin/Ean13 - Caixa<span style="color: gray">*</span></label>
+                        <input type="text" formControlName="CdGtinEan13Caixa" (keypress)="omitirCaracterEspecial($event)" maxlength="50" class="form-control checking-field" placeholder="">
+                        <span class="help-block" *ngIf="formItensEstoque.get('CdGtinEan13Caixa').touched">
+                            <span class="text-danger" *ngIf="formItensEstoque.get('CdGtinEan13Caixa').hasError('required')"></span>                        
+                        </span>                   
+                </div>
+               
+                <div class="form-group col-lg-4" style="width:150px">
+                        <label for="StAtivo">Ativo?<span style="color:gray">*</span></label>
+                        <select formControlName="StAtivo" class="form-control checking-field" style="width: 115px;">                                        
+                        <option value="S">Sim</option>
+                        <option value="N">NÃ£o</option>
+                    </select>
+                            <span class="help-block" *ngIf="formItensEstoque.get('StAtivo').touched">
+                            <span class="text-danger" *ngIf="formItensEstoque.get('StAtivo').hasError('required')"></span>                                                               
+                        </span>
+                    </div>
+               
+            </div>
+<br>
+            <div class="form-inline">
+
+                 <div class="form-group input-sm" style="width: 230px">
+                        <label for="IdUndMedidaProducao">Unid. medida de produÃ§Ã£o<span style="color:gray">*</span></label>
+                        <select formControlName="IdUndMedidaProducao" class="form-control checking-field" [formControl]="formItensEstoque.controls['IdUndMedidaProducao']">                                                       
+                            <option *ngFor="let unidade of unidademedidas | async"
+                                   value={{unidade.idUnidadeMedida}}>
+                                         {{unidade.nmUnidadeMedida}}
+                        </option>
+                    </select>
+                            <span class="help-block" *ngIf="formItensEstoque.get('IdUndMedidaProducao').touched">
+                            <span class="text-danger" *ngIf="formItensEstoque.get('IdUndMedidaProducao').hasError('required')"></span>                                                               
+                        </span>
+                </div>
+
+                <div class="form-group col-lg-3" style="width: 200px">
+                        <label for="NuFatorConversao">NÂ° Fator conversÃ£o<span style="color: gray">*</span></label>
+                        <input type="text" pattern="^[0-9]+$" formControlName="NuFatorConversao" (keypress)="omitirCaracterEspecial($event)" maxlength="50" class="form-control text-right checking-field" placeholder="">
+                        <span class="help-block" *ngIf="formItensEstoque.get('NuFatorConversao').touched">
+                            <span class="text-danger" *ngIf="formItensEstoque.get('NuFatorConversao').hasError('required')"></span> 
+                            <span class="text-danger" *ngIf="formItensEstoque.get('NuFatorConversao').hasError('pattern')"></span>                        
+                        </span>            
+                    </div>
+
+                <div class="form-group col-lg-3" style="width: 250px">
+                        <label for="IdUndMedidaEstoque">Unid. medida do estoque<span style="color:gray">*</span></label>
+                        <select formControlName="IdUndMedidaEstoque" class="form-control checking-field" style="width: 220px;" [formControl]="formItensEstoque.controls['IdUndMedidaEstoque']">                                                        
+                            <option *ngFor="let unidade of unidademedidas | async"
+                                   value={{unidade.idUnidadeMedida}}>
+                                         {{unidade.nmUnidadeMedida}}
+                        </option>
+                    </select>
+                            <span class="help-block" *ngIf="formItensEstoque.get('IdUndMedidaEstoque').touched">
+                            <span class="text-danger" *ngIf="formItensEstoque.get('IdUndMedidaEstoque').hasError('required')"></span>                                                               
+                        </span>
+                </div>
+           
+                <div class="form-group col-lg-3" style="width: 350px;">
+                        <label for="IdUndMedidaSefaz">Unid. Medida SEFAZ<span style="color:gray">*</span></label>
+                        <select formControlName="IdUndMedidaSefaz" class="form-control checking-field" [formControl]="formItensEstoque.controls['IdUndMedidaSefaz']">                                                        
+                            <option *ngFor="let unidadesefaz of unidademedidassefaz | async"
+                                   value={{unidadesefaz.idUnidadeSefaz}}>
+                                         {{unidadesefaz.nmUnidadeSefaz}}
+                        </option>
+                    </select>
+                            <span class="help-block" *ngIf="formItensEstoque.get('IdUndMedidaSefaz').touched">
+                            <span class="text-danger" *ngIf="formItensEstoque.get('IdUndMedidaSefaz').hasError('required')"></span>                                                               
+                        </span>
+                </div>
+            </div>
+
+              
+                <br>
+
+
+            <div class="form-inline">
+
+                    <div class="form-group input-sm" style="width: 130px;">
+                            <label for="QtPesoLiquido">Peso lÃ­quido<span style="color: gray">*</span></label>
+                            <input type="text" pattern="^[0-9]+$" formControlName="QtPesoLiquido" (keypress)="omitirCaracterEspecial($event)" maxlength="50" class="form-control text-right checking-field" placeholder="">
+                            <span class="help-block" *ngIf="formItensEstoque.get('QtPesoLiquido').touched">
+                                <span class="text-danger" *ngIf="formItensEstoque.get('QtPesoLiquido').hasError('required')"></span>  
+                                <span class="text-danger" *ngIf="formItensEstoque.get('QtPesoLiquido').hasError('pattern')"></span>                        
+                            </span>            
+                    </div>
+
+                    <div class="form-group col-lg-2"  style="width: 350px">
+                            <label for="QtPesoBruto">Peso bruto<span style="color: gray">*</span></label>
+                            <input type="text" pattern="^[0-9]+$" formControlName="QtPesoBruto" (keypress)="omitirCaracterEspecial($event)" maxlength="50" class="form-control text-right checking-field" placeholder="">
+                            <span class="help-block" *ngIf="formItensEstoque.get('QtPesoBruto').touched">
+                                <span class="text-danger" *ngIf="formItensEstoque.get('QtPesoBruto').hasError('required')"></span>   
+                                <span class="text-danger" *ngIf="formItensEstoque.get('QtPesoBruto').hasError('pattern')"></span>                        
+                            </span>            
+                    </div>
+                
+
+                    <div class="form-group col-lg-2"  style="width: 400px">
+                            <label for="QtLargMaterial">Larg. do material<span style="color: gray">*</span></label>
+                            <input type="text" pattern="^[0-9]+$" formControlName="QtLargMaterial" (keypress)="omitirCaracterEspecial($event)" maxlength="50" class="form-control text-right checking-field" placeholder="">
+                            <span class="help-block" *ngIf="formItensEstoque.get('QtLargMaterial').touched">
+                                <span class="text-danger" *ngIf="formItensEstoque.get('QtLargMaterial').hasError('required')"></span> 
+                                <span class="text-danger" *ngIf="formItensEstoque.get('QtLargMaterial').hasError('pattern')"></span>                        
+                            </span>            
+                    </div>                    
+
+                    <div class="form-group col-lg-2"  style="width: 400px">
+                            <label for="QtComprMaterial">Comp. do material<span style="color: gray">*</span></label>
+                            <input type="text" pattern="^[0-9]+$" formControlName="QtComprMaterial" (keypress)="omitirCaracterEspecial($event)" maxlength="50" class="form-control text-right checking-field" placeholder="">
+                            <span class="help-block" *ngIf="formItensEstoque.get('QtComprMaterial').touched">
+                                <span class="text-danger" *ngIf="formItensEstoque.get('QtComprMaterial').hasError('required')"></span>  
+                                <span class="text-danger" *ngIf="formItensEstoque.get('QtComprMaterial').hasError('pattern')"></span>                        
+                            </span>            
+                        </div>
+
+                        <div class="form-group col-lg-2"  style="width: 400px">
+                                <label for="IdUndDimensoes">DimensÃµes<span style="color: gray">*</span></label>
+                                <input type="text" pattern="^[0-9]+$" formControlName="IdUndDimensoes" (keypress)="omitirCaracterEspecial($event)" maxlength="50" class="form-control text-right checking-field" placeholder="">
+                                <span class="help-block" *ngIf="formItensEstoque.get('IdUndDimensoes').touched">
+                                    <span class="text-danger" *ngIf="formItensEstoque.get('IdUndDimensoes').hasError('required')"></span>  
+                                    <span class="text-danger" *ngIf="formItensEstoque.get('IdUndDimensoes').hasError('pattern')"></span>                        
+                                </span>            
+                        </div> 
+            </div>
+<br>
+
+                        <div class="form-inline">
+                            
+                                <div class="form-group input-sm" style="width: 230px">
+                                        <label for="IdEmbalagem">Embalagem<span style="color:gray">*</span></label>
+                                        <select formControlName="IdEmbalagem" class="form-control checking-field" [formControl]="formItensEstoque.controls['IdEmbalagem']">                           
+                                            <option value="" disabled>Selecione a embalagem</option>
+                                            <option *ngFor="let embalagem of embalagens | async"
+                                                value={{embalagem.idEmbalagem}}>
+                                                        {{embalagem.nmEmbalagem}}
+                                        </option>
+                                    </select>
+                                            <span class="help-block" *ngIf="formItensEstoque.get('IdEmbalagem').touched">
+                                            <span class="text-danger" *ngIf="formItensEstoque.get('IdEmbalagem').hasError('required')"></span>    
+
+                                        </span>
+                                </div>
+
+                                <div class="form-group col-lg-2"  style="width: 230px">
+                                        <label for="QtLargEmbalagem">Larg. embalagem<span style="color: gray">*</span></label>
+                                        <input type="text" pattern="^[0-9]+$" formControlName="QtLargEmbalagem" (keypress)="omitirCaracterEspecial($event)" maxlength="50" class="form-control text-right checking-field" placeholder="">
+                                        <span class="help-block" *ngIf="formItensEstoque.get('QtLargEmbalagem').touched">
+                                            <span class="text-danger" *ngIf="formItensEstoque.get('IdUndDimensoes').hasError('required')"></span>   
+                                            <span class="text-danger" *ngIf="formItensEstoque.get('IdUndDimensoes').hasError('pattern')"></span>   
+                                        </span>            
+                                </div>  
+
+                                <div class="form-group col-lg-3"  style="width: 180px">
+                                        <label for="QtComprEmbalagem">Comp. embalagem<span style="color: gray">*</span></label>
+                                        <input type="text" pattern="^[0-9]+$" formControlName="QtComprEmbalagem" style="width:100;" (keypress)="omitirCaracterEspecial($event)" maxlength="50" class="form-control text-right checking-field" placeholder="">
+                                        <span class="help-block" *ngIf="formItensEstoque.get('QtComprEmbalagem').touched">
+                                            <span class="text-danger" *ngIf="formItensEstoque.get('QtComprEmbalagem').hasError('required')"></span> 
+                                            <span class="text-danger" *ngIf="formItensEstoque.get('QtComprEmbalagem').hasError('pattern')"></span>                        
+                                        </span>            
+                                </div>  
+
+                                <div class="form-group col-lg-3"  style="width: 180px">
+                                        <label for="QtAltEmbalagem">Alt. da embalagem<span style="color: gray">*</span></label>
+                                        <input type="text" pattern="^[0-9]+$" formControlName="QtAltEmbalagem" (keypress)="omitirCaracterEspecial($event)" maxlength="50" class="form-control text-right checking-field" placeholder="">
+                                        <span class="help-block" *ngIf="formItensEstoque.get('QtAltEmbalagem').touched">
+                                            <span class="text-danger" *ngIf="formItensEstoque.get('QtAltEmbalagem').hasError('required')"></span>  
+                                            <span class="text-danger" *ngIf="formItensEstoque.get('QtAltEmbalagem').hasError('pattern')"></span>                        
+                                        </span>            
+                                </div> 
+                                
+                                <div class="form-group col-lg-3" >
+                                        <label for="QtPesoBrutoEmbalagem">Peso bruto embalagem<span style="color: gray">*</span></label>
+                                        <input type="text" pattern="^[0-9]+$" formControlName="QtPesoBrutoEmbalagem" (keypress)="omitirCaracterEspecial($event)" style="width: 150px;" maxlength="50" class="form-control text-right checking-field" placeholder="">
+                                        <span class="help-block" *ngIf="formItensEstoque.get('QtPesoBrutoEmbalagem').touched">
+                                            <span class="text-danger" *ngIf="formItensEstoque.get('QtPesoBrutoEmbalagem').hasError('required')"></span>
+                                            <span class="text-danger" *ngIf="formItensEstoque.get('QtPesoBrutoEmbalagem').hasError('pattern')"></span>                        
+                                        </span>            
+                                </div>  
+                        </div>
+<br>
+           <div class="form-inline">
+                <div class="form-group input-sm" style="width: 170px">
+                        <label for="QtMinima">Qtd. MÃ­n<span style="color: gray">*</span></label>
+                        <input type="text" pattern="^[0-9]+$" formControlName="QtMinima" (keypress)="omitirCaracterEspecial($event)" maxlength="50" class="form-control text-right checking-field" placeholder="">
+                        <span class="help-block" *ngIf="formItensEstoque.get('QtMinima').touched">
+                            <span class="text-danger" *ngIf="formItensEstoque.get('QtMinima').hasError('required')"></span>    
+                            <span class="text-danger" *ngIf="formItensEstoque.get('QtMinima').hasError('required')"></span>                        
+                        </span>            
+                </div>
+
+                <div class="form-group col-lg-3"  style="width: 200px">
+                        <label for="QtMaxima">Qtd. MÃ¡x<span style="color: gray">*</span></label>
+                        <input type="text" pattern="^[0-9]+$" formControlName="QtMaxima" (keypress)="omitirCaracterEspecial($event)" maxlength="50" class="form-control text-right checking-field" placeholder="">
+                        <span class="help-block" *ngIf="formItensEstoque.get('QtMaxima').touched">
+                            <span class="text-danger" *ngIf="formItensEstoque.get('QtMaxima').hasError('required')"></span>
+                            <span class="text-danger" *ngIf="formItensEstoque.get('QtMaxima').hasError('pattern')"></span>                        
+                        </span>            
+                </div>
+
+                <div class="form-group col-lg-2" style="width: 400px">
+                        <label for="QtSaldoInicial">Saldo Inicial<span style="color: gray">*</span></label>
+                        <input type="text" pattern="^[0-9]+$" formControlName="QtSaldoInicial" (keypress)="omitirCaracterEspecial($event)" maxlength="50" class="form-control text-right checking-field" placeholder="">
+                        <span class="help-block" *ngIf="formItensEstoque.get('QtSaldoInicial').touched">
+                            <span class="text-danger" *ngIf="formItensEstoque.get('QtSaldoInicial').hasError('required')"></span>                        
+                            <span class="text-danger" *ngIf="formItensEstoque.get('QtSaldoInicial').hasError('pattern')"></span>  
+                        </span>                   
+                </div>
+
+                <div class="form-group col-lg-2" style="width: 300px">
+                        <label for="DtSaldoInicial">Dt. Saldo inicial<span style="color: gray">*</span></label>
+                        <input type="text" pattern="^[0-9.//]+$" formControlName="DtSaldoInicial" maxlength="10" (keydown)="mDATA(this.formItensEstoque.controls.DtSaldoInicial)" (keypress)="omitirCaracterEspecial($event)" class="form-control checking-field" placeholder="">
+                        <span class="help-block" *ngIf="formItensEstoque.get('DtSaldoInicial').touched">
+                            <span class="text-danger" *ngIf="formItensEstoque.get('DtSaldoInicial').hasError('required')"></span>                        
+                        </span>                   
+                </div>
+                
+
+                <div class="form-group col-lg-2"  style="width: 200px">
+                        <label for="QtSaldoAtual">Saldo Atual<span style="color: gray">*</span></label>
+                        <input type="text" pattern="^[0-9]+$" formControlName="QtSaldoAtual" (keypress)="omitirCaracterEspecial($event)" maxlength="50" class="form-control text-right checking-field" placeholder="">
+                        <span class="help-block" *ngIf="formItensEstoque.get('QtSaldoAtual').touched">
+                            <span class="text-danger" *ngIf="formItensEstoque.get('QtSaldoAtual').hasError('required')"></span> 
+                            <span class="text-danger" *ngIf="formItensEstoque.get('QtSaldoAtual').hasError('pattern')"></span>                        
+                        </span>            
+                </div>
+           </div>
+<br>
+           <div class="form-inline">
+                <div class="form-group input-sm"  style="width: 140px">
+                        <label for="DtSaldoAtual">Dt. Saldo atual<span style="color: gray">*</span></label>
+                        <input type="text" pattern="^[0-9.//]+$" formControlName="DtSaldoAtual" maxlength="10" (keydown)="mDATA(this.formItensEstoque.controls.DtSaldoAtual)" (keypress)="omitirCaracterEspecial($event)" class="form-control checking-field" placeholder="">
+                        <span class="help-block" *ngIf="formItensEstoque.get('DtSaldoAtual').touched">
+                            <span class="text-danger" *ngIf="formItensEstoque.get('DtSaldoAtual').hasError('required')"></span>
+                            <span class="text-danger" *ngIf="formItensEstoque.get('DtSaldoAtual').hasError('minlength')"></span>   
+                            <span class="text-danger" *ngIf="formItensEstoque.get('DtSaldoAtual').hasError('pattern')"></span>                        
+                        </span>                   
+                </div> 
+             
+            </div>
+            <br>
+            <div class="form-inline">
+                
+                    <div class="form-group input-sm"  style="width: 130px">
+                            <label for="IdTipoEstoque">Tipo de estoque<span style="color: gray">*</span></label>
+                            <input type="text" formControlName="IdTipoEstoque" (keypress)="omitirCaracterEspecial($event)" maxlength="50" class="form-control text-right checking-field" placeholder="">
+                            <span class="help-block" *ngIf="formItensEstoque.get('IdTipoEstoque').touched">
+                                <span class="text-danger" *ngIf="formItensEstoque.get('IdTipoEstoque').hasError('required')"></span>                        
+                            </span>            
+                    </div>
+
+                    <div class="form-group col-lg-2"  style="width: 300px">
+                            <label for="IdFornecedorPadrao">Fornecedor padrÃ£o<span style="color: gray">*</span></label>
+                            <input type="text" formControlName="IdFornecedorPadrao" (keypress)="omitirCaracterEspecial($event)" maxlength="50" class="form-control text-right checking-field" placeholder="">
+                            <span class="help-block" *ngIf="formItensEstoque.get('IdFornecedorPadrao').touched">
+                                <span class="text-danger" *ngIf="formItensEstoque.get('IdFornecedorPadrao').hasError('required')"></span>                        
+                            </span>            
+                    </div>
+
+                    <div class="form-group col-lg-2"  style="width: 400px">
+                            <label for="PcComissao">ComissÃ£o<span style="color: gray">*</span></label>
+                            <input type="text" pattern="^[0-9]+$" formControlName="PcComissao" (keypress)="omitirCaracterEspecial($event)" maxlength="50" class="form-control text-right checking-field" placeholder="">
+                            <span class="help-block" *ngIf="formItensEstoque.get('PcComissao').touched">
+                                <span class="text-danger" *ngIf="formItensEstoque.get('PcComissao').hasError('required')"></span>   
+                                <span class="text-danger" *ngIf="formItensEstoque.get('PcComissao').hasError('pattern')"></span>                       
+                            </span>            
+                    </div>
+
+                <div class="form-group col-lg-3" style="width:165px">
+                        <label for="StSelecionaInventario">Seleciona invent.?<span style="color:gray">*</span></label>
+                        <select formControlName="StSelecionaInventario" class="form-control checking-field" style="width: 100px;">                                        
+                        <option value="S">Sim</option>
+                        <option value="N">NÃ£o</option>
+                    </select>
+                            <span class="help-block" *ngIf="formItensEstoque.get('StSelecionaInventario').touched">
+                            <span class="text-danger" *ngIf="formItensEstoque.get('StSelecionaInventario').hasError('required')"></span>                                                               
+                        </span>
+                    </div>
+
+                <div class="form-group col-lg-3" style="width:165px">
+                        <label for="StControleMinimo">Controle mÃ­nimo<span style="color:gray">*</span></label>
+                        <select formControlName="StControleMinimo" class="form-control checking-field" style="width: 100px;">                                        
+                        <option value="S">Sim</option>
+                        <option value="N">NÃ£o</option>
+                    </select>
+                            <span class="help-block" *ngIf="formItensEstoque.get('StControleMinimo').touched">
+                            <span class="text-danger" *ngIf="formItensEstoque.get('StControleMinimo').hasError('required')"></span>                                                               
+                        </span>
+                    </div>
+                   
+                  
+            </div>
+<br>                        
+                    <div class="form-inline pull-right">
+                            <div class="form-group">
+                                <button class="btn btn-success" style="width: 120px" [disabled]="!formItensEstoque.valid" (click)="submit(formItensEstoque.get('IdItemEstoque').value)">Adicionar <i class="fa fa-check"></i></button>
+                                <button class="btn btn-info" style="width: 120px" (click)="formItensEstoque.reset()">Limpar <i class="fa fa-undo"></i></button>
+                            </div>                  
+                        </div>
+     
+                </div>                    
+            </div>
+        </div>                           
+</form>

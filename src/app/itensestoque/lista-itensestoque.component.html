@@ -1,0 +1,95 @@
+<div class="row">
+  <div class="col-12 ">
+    <!-- <a routerLink="../itensestoque"><button class="btn btn-success pull-left" > Adicionar novo item de estoque</button></a>         -->
+    <div class="text-right">
+      <input type="text" placeholder="Pesquisar" [(ngModel)]="pesquisarTexto" />
+    </div>
+  </div>
+  <br /><br />
+  <div class="col">
+    <div widget class="card">
+      <div class="card-header">
+        <span class="text-uppercase">Itens Estoque</span>
+        <div class="widget-controls">
+          <a data-widgster="expand" href="#" class="transition"
+            ><i class="fa fa-chevron-down"></i
+          ></a>
+          <a data-widgster="collapse" href="#" class="transition"
+            ><i class="fa fa-chevron-up"></i
+          ></a>
+          <a data-widgster="fullscreen" href="#" class="transition"
+            ><i class="fa fa-expand"></i
+          ></a>
+          <a data-widgster="restore" href="#" class="transition"
+            ><i class="fa fa-compress"></i
+          ></a>
+        </div>
+      </div>
+      <div
+        class="card-body widget-body"
+        style="overflow-x:scroll; overflow-y: scroll;"
+        data-html2canvas-ignore="true"
+      >
+        <!-- Tabela PadrÃ£o -->
+        <table class="table" id="export">
+          <thead class="thead-light" data-html2canvas-ignore="true">
+            <tr>
+              <th>CÃ³digo</th>
+              <th>Material</th>
+              <th>Qt.saldo atual</th>
+              <th>Dt.saldo atual</th>
+              <th>Quantidade</th>
+              <th>Data de inserÃ§Ã£o</th>
+              <th>Data de atualizaÃ§Ã£o</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- <tr *ngFor="let itensestoque of ItensEstoque$ | async | filter:pesquisarTexto;">   
+                                       <td>{{itensestoque.material.cdMaterial}}</td>                                    
+                                       <td>{{itensestoque.material.nmMaterial}}</td>                                                                           
+                                       <td>{{itensestoque.qtSaldoAtual}}</td>
+                                       <td>{{itensestoque.dtSaldoAtual}}</td>
+                                       <td></td>                                                                           
+                                       <td data-html2canvas-ignore="true">{{itensestoque.dtInsere | date: 'dd/MM/yyyy - HH:mm:SS'}}</td>
+                                       <td data-html2canvas-ignore="true">{{itensestoque.dtAtualiza | date: 'dd/MM/yyyy - HH:mm:SS'}}</td>   
+                                                                                                                                   
+                                       <td class="text-center">
+                                            <div class="btn-group">
+                                                <button class="btn btn-success"  data-html2canvas-ignore="true" (click)="editarItensEstoque(itensestoque.idItemEstoque)">Editar <i class="fa fa-edit"></i></button>
+                                                <button class="btn btn-sm btn-danger" data-html2canvas-ignore="true">Excluir <i class="fa fa-eraser"></i></button>
+                                                </div>                                  
+                                        </td>    
+                                       </tr>                             -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="pull-right">
+  <!-- <button class="btn btn-info btn-rounded btn-right" (click)="onExportClick()">Exportar para PDF(Html2PDF)</button>-->
+  <button
+    class="btn btn-info btn-rounded btn-right"
+    (click)="generatePdf('print')"
+  >
+    Salvar como
+  </button>
+
+  <!--<button (click)="generatePdf('download')">Salvar</button>-->
+
+  <button
+    class="btn btn-info btn-rounded btn-right"
+    (click)="generatePdf('open')"
+  >
+    Abrir
+  </button>
+
+  <button kendo-button (click)="generatePdf()">
+    Export As PDF
+  </button>
+
+  <button class="btn btn-info btn-rounded btn-right" (click)="convert()">
+    Pdf(jspfd)
+  </button>
+</div>
